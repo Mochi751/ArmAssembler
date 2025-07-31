@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 def split_32bit_to_4bit_segments(num_32bit):
     """
     Splits a 32-bit integer into eight 4-bit segments.
