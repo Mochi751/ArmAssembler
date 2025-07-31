@@ -173,6 +173,7 @@ for i in range(len(clean_lines)):
             # <amount> / imm3
             # int(inst.split(" ")[5][3:], 16)
             result = ((1113 << 21) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 13) + (int(inst.split(" ")[5][3:], 16) << 10) + ((int(inst.split(" ")[2][1:-1])) << 5) + (int(inst.split(" ")[1][1:-1])))
+            pass
         elif choice == "ADD <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}":
             # ADD <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}
             # ADD (shifted register)
@@ -187,7 +188,8 @@ for i in range(len(clean_lines)):
             # (int(inst.split(" ")[4][3:-1], 16) << 22)
             # <amount> / imm6
             # (int(inst.split(" ")[5][3:], 16) << 10)
-            result = (((1112 << 21)) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 22) + (int(inst.split(" ")[5][3:], 16) << 10))
+            result = (((1112 << 21)) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + ((int(inst.split(" ")[4][3:-1], 16)) << 22) + ((int(inst.split(" ")[5][3:], 16)) << 10))
+            pass
         else:
             result = 0
     elif inst.split(" ")[0] == "ADDS":
@@ -207,6 +209,7 @@ for i in range(len(clean_lines)):
             # <amount> / imm3
             # int(inst.split(" ")[5][3:], 16)
             result = ((1369 << 21) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 13) + (int(inst.split(" ")[5][3:], 16) << 10) + ((int(inst.split(" ")[2][1:-1])) << 5) + (int(inst.split(" ")[1][1:-1])))
+            pass
         elif choice == "ADDS <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}":
             # ADDS <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}
             # ADDS (shifted register)
@@ -222,12 +225,13 @@ for i in range(len(clean_lines)):
             # <amount> / imm6
             # (int(inst.split(" ")[5][3:], 16) << 10)
             result = (((1368 << 21)) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 22) + (int(inst.split(" ")[5][3:], 16) << 10))
+            pass
         else:
             result = 0
+            pass
     elif inst.split(" ")[0] == "ADR":
         # ADR <Xd>, <label>
         # ADR
-
         num = int(inst.split(" ")[2][3:],16)
         # Calculate shift to bring the first two bits to the rightmost position    
         shift_amount = num.bit_length() - 2 
@@ -240,7 +244,6 @@ for i in range(len(clean_lines)):
     elif inst.split(" ")[0] == "ADRP":
         # ADRP <Xd>, <label>
         # ADRP
-
         num = int(inst.split(" ")[2][3:],16)
         # Calculate shift to bring the first two bits to the rightmost position    
         shift_amount = num.bit_length() - 2 
@@ -702,7 +705,7 @@ for i in range(len(clean_lines)):
         # <Xn>
         # int(inst.split(" ")[1][1:]) << 5
         result = ((54815 << 16) + (int(inst.split(" ")[1][1:]) << 5)) 
-    elif inst.split(" ")[0] = "BRK":
+    elif inst.split(" ")[0] == "BRK":
         # BRK #<imm16>
         # BRK
         # print(1697 << 21)
@@ -818,7 +821,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1960 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBLT" and (int(inst.split(" ")[2][3:-1]), 16).isdigit():
+    elif inst.split(" ")[0] == "CBLT" and (inst.split(" ")[2][3:-1]).isdigit():
         # CBLT <Xt>, #<imm6>, <label>
         # CBLT
         # print(1961 << 21)
@@ -829,7 +832,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1961 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBHI" and (int(inst.split(" ")[2][3:-1]), 16).isdigit():
+    elif inst.split(" ")[0] == "CBHI" and (inst.split(" ")[2][3:-1]).isdigit():
         # CBHI <Xt>, #<imm6>, <label>
         # CBHI
         # print(1962 << 21)
@@ -840,7 +843,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1962 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBLO" and (int(inst.split(" ")[2][3:-1]), 16).isdigit():
+    elif inst.split(" ")[0] == "CBLO" and (inst.split(" ")[2][3:-1]).isdigit():
         # CBLO <Xt>, #<imm6>, <label>
         # CBLO
         # print(1963 << 21)
@@ -851,7 +854,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1963 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBEQ" and (int(inst.split(" ")[2][3:-1]), 16).isdigit():
+    elif inst.split(" ")[0] == "CBEQ" and (inst.split(" ")[2][3:-1]).isdigit():
         # CBEQ <Xt>, #<imm6>, <label>
         # CBEQ
         # print(1964 << 21)
@@ -862,7 +865,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1964 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBNE" and (int(inst.split(" ")[2][3:-1]), 16).isdigit():
+    elif inst.split(" ")[0] == "CBNE" and (inst.split(" ")[2][3:-1]).isdigit():
         # CBNE <Xt>, #<imm6>, <label>
         # CBNE
         # print(1965 << 21)
@@ -873,7 +876,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1965 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:-1]), 16) << 15) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBGT" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBGT" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBGT <Xt>, <Xm>, <label>
         # CBGT
         # print(1952 << 21)
@@ -884,7 +887,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1952 << 21) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 16) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBGE" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBGE" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBGE <Xt>, <Xm>, <label>
         # CBGE
         # print(1953 << 21)
@@ -895,7 +898,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1953 << 21) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 16) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBHI" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBHI" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBHI <Xt>, <Xm>, <label>
         # CBHI
         # print(1954 << 21)
@@ -906,7 +909,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1954 << 21) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 16) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBHS" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBHS" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBHS <Xt>, <Xm>, <label>
         # CBHS
         # print(1955 << 21)
@@ -917,7 +920,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1955 << 21) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 16) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBEQ" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBEQ" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBEQ <Xt>, <Xm>, <label>
         # CBEQ
         # print(1958 << 21)
@@ -928,7 +931,7 @@ for i in range(len(clean_lines)):
         # <label> / <imm9>
         # (int(inst.split(" ")[3][3:],16) << 5)
         result = ((1958 << 21) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 16) + (int(inst.split(" ")[3][3:],16) << 5))
-    elif inst.split(" ")[0] == "CBNE" and (int(inst.split(" ")[2][1:-1])).isdigit():
+    elif inst.split(" ")[0] == "CBNE" and (inst.split(" ")[2][1:-1]).isdigit():
         # CBNE <Xt>, <Xm>, <label>
         # CBNE
         # print(1959 << 21)
@@ -999,10 +1002,10 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[1][1:-1]) << 5)
         # <Xm|SP>
         # (int(inst.split(" ")[2][1:]) << 16)
-        result = ((3133145119) + (int(inst.split(" ")[1][1:-1]) << 5) + (int(inst.split(" ")[2][1:]) << 16))
+        result = ((3133145119) + ((int(inst.split(" ")[1][1:-1])) << 5) + ((int(inst.split(" ")[2][1:])) << 16))
     elif inst.split(" ")[0] == "CMP":
         choice = input("CMP <Xn|SP>, <R><m>{, <extend> {#<amount>}} or CMP <Xn|SP>, #<imm>{, <shift>} or CMP <Xn>, <Xm>{, <shift> #<amount>}?: ")
-        if choice == "CMP <Xn|SP>, #<imm>{, <shift>}": 
+        if choice == "CMP <Xn|SP>, <R><m>{, <extend> {#<amount>}}":
             # CMP <Xn|SP>, <Rm>{, <extend> {#<amount>}}
             # CMP - extended register
             # print(3944742943)
@@ -1014,7 +1017,8 @@ for i in range(len(clean_lines)):
             # (int(inst.split(" ")[3][3:-1], 16) << 13)
             # <amount> / imm3
             # (int(inst.split(" ")[4][3:], 16) << 10) 
-            result == ((3944742943) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][1:-1] << 16)) + (int(inst.split(" ")[3][3:-1], 16) << 13) + (int(inst.split(" ")[4][3:], 16) << 10))
+            result == ((3944742943) + ((int(inst.split(" ")[1][1:-1])) << 5) + ((int(inst.split(" ")[2][1:-1])) << 16) + ((int(inst.split(" ")[3][3:-1], 16)) << 13) + ((int(inst.split(" ")[4][3:], 16)) << 10))
+            pass
         elif choice == "CMP <Xn>, <Xm>{, <shift> #<amount>}": 
             # CMP <Xn>, <Xm>{, <shift> #<amount>}
             # CMP - shifted register
@@ -1027,20 +1031,23 @@ for i in range(len(clean_lines)):
             # (int(inst.split(" ")[3][3:-1], 16) << 22)
             # <amount> / imm6
             # (int(inst.split(" ")[4][3:], 16) << 10) 
-            result = ((3942645791) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][1:-1] << 16)) + (int(inst.split(" ")[3][3:-1], 16) << 22) + (int(inst.split(" ")[4][3:], 16) << 10))       
-       elif choice == "CMP <Xn|SP>, #<imm>{, <shift>}":
+            result = ((3942645791) + ((int(inst.split(" ")[1][1:-1])) << 5) + ((int(inst.split(" ")[2][1:-1])) << 16) + ((int(inst.split(" ")[3][3:-1], 16)) << 22) + ((int(inst.split(" ")[4][3:], 16)) << 10)) 
+            pass      
+        elif choice == "CMP <Xn|SP>, #<imm>{, <shift>}":
             # CMP <Xn|SP>, #<imm12>{, <shift>}
             # CMP - immediate
             # print(4043309087)
             # <Xn|SP>
             # (int(inst.split(" ")[1][1:-1] << 5)
             # <imm12>
-            # (int(inst.split(" ")[2][3:-1], 16) < 10)
+            # (int(inst.split(" ")[2][3:-1], 16) << 10)
             # <shift> / sh
             # (int(inst.split(" ")[3][3:], 16) << 22) 
-            result = ((4043309087) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][3:-1], 16) < 10) + (int(inst.split(" ")[3][3:], 16) << 22))
+            result = ((4043309087) + ((int(inst.split(" ")[1][1:-1]) << 5)) + ((int(inst.split(" ")[2][3:-1], 16) << 10)) + ((int(inst.split(" ")[3][3:], 16)) << 22))
+            pass
         else:
             result = 0
+            pass
     elif inst.split(" ")[0] == "CMN":
         choice = input("CMN <Xn|SP>, <R><m>{, <extend> {#<amount>}} or CMN <Xn|SP>, #<imm>{, <shift>} or CMN <Xn>, <Xm>{, <shift> #<amount>}?: ")
         if choice == "CMN <Xn|SP>, #<imm>{, <shift>}": 
@@ -1056,6 +1063,7 @@ for i in range(len(clean_lines)):
             # <amount> / imm3
             # (int(inst.split(" ")[4][3:], 16) << 10) 
             result == ((2871001119) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][1:-1] << 16)) + (int(inst.split(" ")[3][3:-1], 16) << 13) + (int(inst.split(" ")[4][3:], 16) << 10))
+            pass
         elif choice == "CMN <Xn>, <Xm>{, <shift> #<amount>}": 
             # CMN <Xn>, <Xm>{, <shift> #<amount>}
             # CMN - shifted register
@@ -1069,7 +1077,8 @@ for i in range(len(clean_lines)):
             # <amount> / imm6
             # (int(inst.split(" ")[4][3:], 16) << 10) 
             result = ((2868903967) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][1:-1] << 16)) + (int(inst.split(" ")[3][3:-1], 16) << 22) + (int(inst.split(" ")[4][3:], 16) << 10))       
-       elif choice == "CMN <Xn|SP>, #<imm>{, <shift>}":
+            pass
+        elif choice == "CMN <Xn|SP>, #<imm>{, <shift>}":
             # CMN <Xn|SP>, #<imm12>{, <shift>}
             # CMN - immediate
             # print(2969567263)
@@ -1080,8 +1089,10 @@ for i in range(len(clean_lines)):
             # <shift> / sh
             # (int(inst.split(" ")[3][3:], 16) << 22) 
             result = ((2969567263) + (int(inst.split(" ")[1][1:-1] << 5)) + (int(inst.split(" ")[2][3:-1], 16) < 10) + (int(inst.split(" ")[3][3:], 16) << 22))
+            pass
         else:
             result = 0
+            pass
     elif inst.split(" ")[0] == "CCMP" and (inst.split(" ")[2][1:-1]).isdigit():
         # CCMP <Xn>, <Xm>, #<nzcv>, <cond>
         # CCMP
@@ -1279,7 +1290,7 @@ for i in range(len(clean_lines)):
         # <Xm>
         # ((int(inst.split(" ")[3][1:-1])) << 16)
         result = ((316929 << 13) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16))
-        elif inst.split(" ")[0] == "LSL":
+    elif inst.split(" ")[0] == "LSL":
         # LSL<Xd>, <Xn>, #<shift>
         # print(845 << 22)
         # <Xd>
@@ -1300,7 +1311,7 @@ for i in range(len(clean_lines)):
         # <Xm>
         # ((int(inst.split(" ")[3][1:-1])) << 16)
         result = ((2535433 << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16))
-        elif inst.split(" ")[0] == "LSR":
+    elif inst.split(" ")[0] == "LSR":
         # LSR <Xd>, <Xn>, #<shift>
         # print(3461183 << 10)
         # <Xd>
@@ -1575,6 +1586,7 @@ for i in range(len(clean_lines)):
             # <amount> / imm3
             # int(inst.split(" ")[5][3:], 16)
             result = ((1625 << 21) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 13) + (int(inst.split(" ")[5][3:], 16) << 10) + ((int(inst.split(" ")[2][1:-1])) << 5) + (int(inst.split(" ")[1][1:-1])))
+            pass
         elif choice == "SUB <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}":
             # SUB <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}
             # SUB (shifted register)
@@ -1589,9 +1601,11 @@ for i in range(len(clean_lines)):
             # (int(inst.split(" ")[4][3:-1], 16) << 22)
             # <amount> / imm6
             # (int(inst.split(" ")[5][3:], 16) << 10)
-            result = (((1624 << 21)) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 22) + (int(inst.split(" ")[5][3:], 16) << 10))
+            result = ((1624 << 21) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + ((int(inst.split(" ")[4][3:-1], 16)) << 22) + ((int(inst.split(" ")[5][3:], 16)) << 10))
+            pass
         else:
             result = 0
+            pass
     elif inst.split(" ")[0] == "SUBS":
         choice = input("SUBS <Xd|SP>, <Xn|SP>, <Rm>{, <extend>, {#<amount>}} or SUBS <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}?: ")
         if choice == "SUBS <Xd|SP>, <Xn|SP>, <Rm>{, <extend>, {#<amount>}}": 
@@ -1609,6 +1623,7 @@ for i in range(len(clean_lines)):
             # <amount> / imm3
             # int(inst.split(" ")[5][3:], 16)
             result = ((1881 << 21) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 13) + (int(inst.split(" ")[5][3:], 16) << 10) + ((int(inst.split(" ")[2][1:-1])) << 5) + (int(inst.split(" ")[1][1:-1])))
+            pass
         elif choice == "SUBS <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}":
             # SUBS <Xd>, <Xn>, <Xm>{, <shift>, {#<amount>}}
             # SUBS (shifted register)
@@ -1626,9 +1641,10 @@ for i in range(len(clean_lines)):
             result = (((1880 << 21)) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:-1], 16) << 22) + (int(inst.split(" ")[5][3:], 16) << 10))
         else: 
             result = 0    
+            pass
     elif inst.split(" ")[0] == "LDAPR":
         choice = input("Post-index or No offset?: ")
-        if choice = "Post-index":
+        if choice == "Post-index":
             # LDAPR <Xt>, [<Xn|SP>]
             # LDAPR
             # print(3567618 << 10)
@@ -1637,7 +1653,8 @@ for i in range(len(clean_lines)):
             # [<Xn|SP>]
             # ((int(inst.split(" ")[2][1:-1])) << 5)
             result = ((3567618 << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
-        elif choice = "No offset":
+            pass
+        elif choice == "No offset":
             # LDAPR <Xt>, [<Xn|SP>]
             # LDAPR
             # print(4075504 << 10)
@@ -1646,8 +1663,10 @@ for i in range(len(clean_lines)):
             # [<Xn|SP>]
             # ((int(inst.split(" ")[2][1:-1])) << 5)
             result = ((4075504 << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
         else:
             result = 0
+            pass
     elif inst.split(" ")[0] == "LDAPRB":
         # LDAPRB <Wt>, [<Xn|SP>]
         # LDAPRB
@@ -1819,6 +1838,7 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[1][1:-1]))
         # [<Xn|SP>]
         # ((int(inst.split(" ")[2][1:-1])) << 5) 
+        result = ((1193951 << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
     elif inst.split(" ")[0] == "LDNP": 
         # LDNP <Xt1>, <Xt2>, [<Xn|SP>{, #<imm7>}]
         # LDNP
@@ -1832,6 +1852,100 @@ for i in range(len(clean_lines)):
         # <imm7>
         # (int(inst.split(" ")[4][3:], 16) << 15)
         result = ((673 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+    elif inst.split(" ")[0] == "LDP" and ((inst.split(" ")[4][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Signed offset?: ")
+        if choice == "Post-index":
+            # LDP <Xt1>, <Xt2>, [<Xn|SP>], #<imm7>
+            # LDP - Post-index
+            # print(675 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((675 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        elif choice == "Pre-index":
+            # LDP <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
+            # LDP - Pre-index
+            # print(679 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((679 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        elif choice == "Signed offset":
+            # LDP <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
+            # LDP - Signed offset
+            # print(677 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((677 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "LDPSW" and ((inst.split(" ")[4][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Signed offset?: ")
+        if choice == "Post-index":
+            # LDPSW <Xt1>, <Xt2>, [<Xn|SP>], #<imm7>
+            # LDPSW - Post-index
+            # print(419 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((419 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        elif choice == "Pre-index":
+            # LDPSW <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
+            # LDPSW - Pre-index
+            # print(423 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((423 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        elif choice == "Signed offset":
+            # LDPSW <Xt1>, <Xt2>, [<Xn|SP>], #<imm>
+            # LDPSW - Signed offset
+            # print(421 << 22)
+            # <Xt1>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xt2>
+            # (int(inst.split(" ")[2][1:-1]) << 10)
+            # <Xn|SP>
+            # (int(inst.split(" ")[3][1:-1]) << 5)
+            # <imm7>
+            # (int(inst.split(" ")[4][3:], 16) << 15)
+            result = ((421 << 22) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 10) + (int(inst.split(" ")[3][1:-1]) << 5) + (int(inst.split(" ")[4][3:], 16) << 15))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "LDRSW" and ((inst.split(" ")[2][3:])).isdigit():
         # LDRSW <Xt>, <label>
         # LDRSW - literal
@@ -1854,6 +1968,47 @@ for i in range(len(clean_lines)):
         # <extend>
         # (int(inst.split(" ")[4][3:], 16) << 13)
         result = ((1512449 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+    elif inst.split(" ")[0] == "LDRSW" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDRSW <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSW - Post-index
+            # print(3022849 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((3022849 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDRSW <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSW - Pre-index
+            # print(3022851 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((3022851 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDRSW <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSW - Unsigned offset
+            # print(371 << 23)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((371 << 23) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "LDRSH" and ((inst.split(" ")[2][1:-1])).isdigit():
         # LDRSH <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
         # LDRSH - register
@@ -1867,6 +2022,47 @@ for i in range(len(clean_lines)):
         # <extend> / option
         # (int(inst.split(" ")[4][3:], 16) << 13)
         result = ((988161 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+    elif inst.split(" ")[0] == "LDRSH" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDRSH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSH - Post-index
+            # print(1974273 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1974273 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDRSH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSH - Pre-index
+            # print(1974275 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1974275 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDRSH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSH - Unsigned offset
+            # print(243 << 23)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((243 << 23) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "LDRH" and ((inst.split(" ")[2][1:-1])).isdigit():
         # LDRH <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
         # LDRH - register
@@ -1880,6 +2076,47 @@ for i in range(len(clean_lines)):
         # <extend> / option
         # (int(inst.split(" ")[4][3:], 16) << 13)
         result = ((986113 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+    elif inst.split(" ")[0] == "LDRH" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRH - Post-index
+            # print(1970177 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1970177 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRH - Pre-index
+            # print(1970179 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1970179 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRH - Unsigned offset
+            # print(485 << 22)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((485 << 22) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "LDR" and ((inst.split(" ")[2][1:-1])).isdigit():
         # LDR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
         # LDR - register
@@ -1901,18 +2138,237 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[1][1:-1]))
         # <label> / imm19
         # ((int(inst.split(" ")[2][3:]), 16) << 5)
-        result = ((11 << 27) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:]), 16) << 5))
+        result = ((11 << 27) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][3:], 16)) << 5))
+    elif inst.split(" ")[0] == "LDR" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDR <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDR - Post-index
+            # print(4067329 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((4067329 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDR <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDR - Pre-index
+            # print(4067331 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((4067331 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDR <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDR - Unsigned offset
+            # print(997 << 22)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((997 << 22) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "LDRSB" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDRSB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSB - Post-index
+            # print(925697 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((925697 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDRSB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSB - Pre-index
+            # print(925699 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((925699 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDRSB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRSB - Unsigned offset
+            # print(230 << 22)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((230 << 22) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "LDRB" and ((inst.split(" ")[3][3:])).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # LDRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRB - Post-index
+            # print(921601 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((921601 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # LDRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRB - Pre-index
+            # print(921603 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((921603 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # LDRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # LDRB - Unsigned offset
+            # print(229 << 22)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((229 << 22) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "LDRSB" and ((inst.split(" ")[3][1:-1])).isdigit():
+        choice = input("LDRSB <Xt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}] or LDRSB <Xt>, [<Xn|SP>, <Xm>{, LSL <amount>}]?: ")
+        if choice == "LDRSB <Xt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}]":
+            # LDRSB <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
+            # LDRSB - Extended register
+            # print(463873 << 11)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # <extend> / option
+            # (int(inst.split(" ")[4][3:], 16) << 13)
+            result = ((463873 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+            pass
+        elif choice == "LDRSB <Xt>, [<Xn|SP>, <Xm>{, LSL <amount>}]":
+            # LDRSB <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, LSL}]
+            # LDRSB - Shifted register
+            # print(463873 << 11)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # LSL
+            # (3 << 13)
+            result = ((463873 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (3 << 13))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "LDRB" and ((inst.split(" ")[3][1:-1])).isdigit():
+        choice = input("LDRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}] or LDRB <Wt>, [<Xn|SP>, <Xm>{, LSL <amount>}]?: ")
+        if choice == "LDRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}]":
+            # LDRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
+            # LDRB - Extended register
+            # print(461825 << 11)
+            # <Wt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # <extend> / option
+            # (int(inst.split(" ")[4][3:], 16) << 13)
+            result = ((461825 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+            pass
+        elif choice == "LDRB <Wt>, [<Xn|SP>, <Xm>{, LSL <amount>}]":
+            # LDRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>){, LSL}]
+            # LDRB - Shifted register
+            # print(461825 << 11)
+            # <Wt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # LSL
+            # (3 << 13)
+            result = ((461825 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (3 << 13))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "STG":
-        # STG <Xt>, [<Xn|SP>{, #<simm>}]
-        # STG
-        # print(1739 << 21)
-        # <Xt>
-        # (int(inst.split(" ")[1][1:-1]))
-        # [<Xn|SP>]
-        # ((int(inst.split(" ")[2][1:-1])) << 5) 
-        # <simm> / imm9
-        # ((int(inst.split(" ")[3][3:]), 16) << 12)
-        result = ((1739 << 21) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+        choice = input("Post-index or Pre-index or Signed offset?: ")
+        if choice == "Post-index":
+            # STG <Xt>, [<Xn|SP>{, #<simm>}]
+            # STG - Post-index
+            # print(3557377 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((3557377 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # STG <Xt>, [<Xn|SP>{, #<simm>}]
+            # STG - Pre-index
+            # print(3557379 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((3557379 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Signed offset":
+            # STG <Xt>, [<Xn|SP>{, #<simm>}]
+            # STG - Signed offset
+            # print(3557378 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((3557378 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
     elif inst.split(" ")[0] == "STGM":
         # STGM <Xt>, [<Xn|SP>]
         # STGM
@@ -1949,17 +2405,188 @@ for i in range(len(clean_lines)):
         # [<Xn|SP>]
         # ((int(inst.split(" ")[2][1:-1])) << 5) 
         result = ((1189887 << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
-    elif inst.split(" ")[0] == "LDG":
-        # LDG <Xt>, [<Xn|SP>{, #<simm>}]
-        # LDG
-        # print(1739 << 21)
+    elif inst.split(" ")[0] == "STR" and (inst.split(" ")[3][3:]).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # STR <Xt>, [<Xn|SP>{, #<simm>}]
+            # STR - Post-index
+            # print(4063233 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((4063233 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # STR <Xt>, [<Xn|SP>{, #<simm>}]
+            # STR - Pre-index
+            # print(4063235 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((4063235 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # STR <Xt>, [<Xn|SP>{, #<simm>}]
+            # STR - Unsigned offset
+            # print(249 << 24)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 10)
+            result = ((249 << 24) + ((int(inst.split(" ")[3][3:]), 16) << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "STRB" and (inst.split(" ")[3][3:]).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # STRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRB - Post-index
+            # print(917505 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((917505 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # STRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRB - Pre-index
+            # print(917507 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((917507 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # STRB <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRB - Unsigned offset
+            # print(57 << 24)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 10)
+            result = ((57 << 24) + ((int(inst.split(" ")[3][3:]), 16) << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "STRH" and (inst.split(" ")[3][3:]).isdigit():
+        choice = input("Post-index or Pre-index or Unsigned offset?: ")
+        if choice == "Post-index":
+            # STRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRH - Post-index
+            # print(1966081 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1966081 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Pre-index":
+            # STRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRH - Pre-index
+            # print(1966083 << 10)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm9
+            # ((int(inst.split(" ")[3][3:]), 16) << 12)
+            result = ((1966083 << 10) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        elif choice == "Unsigned offset":
+            # STRH <Xt>, [<Xn|SP>{, #<simm>}]
+            # STRH - Unsigned offset
+            # print(121 << 24)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # [<Xn|SP>]
+            # ((int(inst.split(" ")[2][1:-1])) << 5) 
+            # <simm> / imm12
+            # ((int(inst.split(" ")[3][3:]), 16) << 10)
+            result = ((121 << 24) + ((int(inst.split(" ")[3][3:]), 16) << 10) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "STR" and ((inst.split(" ")[3][1:-1])).isdigit():
+        # STR <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
+        # STR - register
+        # print(2032641 << 11)
         # <Xt>
         # (int(inst.split(" ")[1][1:-1]))
-        # [<Xn|SP>]
-        # ((int(inst.split(" ")[2][1:-1])) << 5) 
-        # <simm> / imm9
-        # ((int(inst.split(" ")[3][3:]), 16) << 12)
-        result = ((1739 << 21) + ((int(inst.split(" ")[3][3:]), 16) << 12) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5))
+        # <Xn|SP>
+        # ((int(inst.split(" ")[2][1:-1])) << 5)
+        # <Wm>|<Xm>
+        # ((int(inst.split(" ")[3][1:-1])) << 16)
+        # <extend> / option
+        # (int(inst.split(" ")[4][3:], 16) << 13)
+        result = ((2032641 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+    elif inst.split(" ")[0] == "STRB" and ((inst.split(" ")[3][1:-1])).isdigit():
+        choice = input("STRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}] or STRB <Wt>, [<Xn|SP>, <Xm>{, LSL <amount>}]?: ")
+        if choice == "STRB <Wt>, [<Xn|SP>, (<Wm>|<Xm>), <extend> {<amount>}]":
+            # STRB <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
+            # STRB - Extended register
+            # print(459777 << 11)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # <extend> / option
+            # (int(inst.split(" ")[4][3:], 16) << 13)
+            result = ((459777 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))
+            pass
+        elif choice == "STRB <Wt>, [<Xn|SP>, <Xm>{, LSL <amount>}]":
+            # STRB <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, LSL}]
+            # STRB - Shifted register
+            # print(459777 << 11)
+            # <Xt>
+            # (int(inst.split(" ")[1][1:-1]))
+            # <Xn|SP>
+            # ((int(inst.split(" ")[2][1:-1])) << 5)
+            # <Wm>|<Xm>
+            # ((int(inst.split(" ")[3][1:-1])) << 16)
+            # LSL
+            # (3 << 13)
+            result = ((459777 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (3 << 13))
+            pass
+        else:
+            result = 0
+            pass
+    elif inst.split(" ")[0] == "STRH" and ((inst.split(" ")[3][1:-1])).isdigit():
+        # STRH <Xt>, [<Xn|SP>, (<Wm>|<Xm>){, <extend> }]
+        # STRH - register
+        # print(984065 << 11)
+        # <Xt>
+        # (int(inst.split(" ")[1][1:-1]))
+        # <Xn|SP>
+        # ((int(inst.split(" ")[2][1:-1])) << 5)
+        # <Wm>|<Xm>
+        # ((int(inst.split(" ")[3][1:-1])) << 16)
+        # <extend> / option
+        # (int(inst.split(" ")[4][3:], 16) << 13)
+        result = ((984065 << 11) + (int(inst.split(" ")[1][1:-1])) + ((int(inst.split(" ")[2][1:-1])) << 5) + ((int(inst.split(" ")[3][1:-1])) << 16) + (int(inst.split(" ")[4][3:], 16) << 13))    
     elif inst == "HLT": 
         result = ((849 << 22) + (int(inst.split(" ")[1][3:], 16)) << 5)
     elif inst == "HVC": 
@@ -2046,7 +2673,7 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[2][1:-1]) << 5)    
         # <uimm8>
         # (int(inst.split(" ")[3][3:], 16) << 10)
-    result = ((9329 << 18) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][3:], 16) << 10))
+        result = ((9329 << 18) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][3:], 16) << 10))
     elif inst.split(" ")[0] == "UMAX" and ((inst.split(" ")[1][1:-1]).isdigit()) and ((inst.split(" ")[2][1:-1]).isdigit()) and ((inst.split(" ")[3][1:]).isdigit()):
         # UMAX <Xd>, <Xn>, <Xm>
         # UMAX
@@ -2057,7 +2684,7 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[2][1:-1]) << 5)    
         # <Xm>
         # (int(inst.split(" ")[3][1:]) << 16)
-    result = ((2535449 << 10) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][1:]) << 16))
+        result = ((2535449 << 10) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][1:]) << 16))
     elif inst.split(" ")[0] == "UMIN" and ((inst.split(" ")[1][1:-1]).isdigit()) and ((inst.split(" ")[2][1:-1]).isdigit()) and ((inst.split(" ")[3][3:]).isdigit()):
         # UMIN <Xd>, <Xn>, #<uimm8>
         # UMIN
@@ -2068,7 +2695,7 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[2][1:-1]) << 5)    
         # <uimm8>
         # (int(inst.split(" ")[3][3:], 16) << 10)
-    result = ((9331 << 18) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][3:], 16) << 10))
+        result = ((9331 << 18) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][3:], 16) << 10))
     elif inst.split(" ")[0] == "UMIN" and ((inst.split(" ")[1][1:-1]).isdigit()) and ((inst.split(" ")[2][1:-1]).isdigit()) and ((inst.split(" ")[3][1:]).isdigit()):
         # UMIN <Xd>, <Xn>, <Xm>
         # UMIN
@@ -2079,7 +2706,7 @@ for i in range(len(clean_lines)):
         # (int(inst.split(" ")[2][1:-1]) << 5)    
         # <Xm>
         # (int(inst.split(" ")[3][1:]) << 16)
-    result = ((2535451 << 10) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][1:]) << 16))
+        result = ((2535451 << 10) + (int(inst.split(" ")[1][1:-1])) + (int(inst.split(" ")[2][1:-1]) << 5) + (int(inst.split(" ")[3][1:]) << 16))
     elif inst.split(" ")[0] == "UMNEGL":
         # UMNEGL <Xd>, <Wn>, <Wm>
         # UMNEGL
